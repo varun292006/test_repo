@@ -1,5 +1,6 @@
+node {
     stage('Source'){
-        git 'https://github.com/varun292006/test_repo.git'
+        git 'https://github.com/brentlaster/gradle-greetings.git'
     }
     stage('Build'){
      echo "This is a build step"
