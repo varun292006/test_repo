@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage("source") {
             steps {
-                git 'https://github.com/brentlaster/gradle-greetings.git'
+                git 'https://github.com/varun292006/test_repo.git'
             }
         }
         stage("Build") {
