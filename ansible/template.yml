@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  become: yes
+  vars:
+    code_name: mycode
+    version: 4.2
+  tasks:
+    - name: deploy config file
+      template:
+        src: config.j2
+        dest: /tmp/config

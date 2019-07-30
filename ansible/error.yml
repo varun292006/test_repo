@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: Install software
+      apt:
+        name: broke
+        state: latest
+      ignore_errors: yes
+    - name: Run utility
+      command: /home/ansible/do-stuff.sh what
+      register: command_output
+      changed_when: "'CHANGED' in cmd_output.stdout"
+      failed_when: "'FAIL' in cmd_output.stdout"
+
+##### do-stuff.sh ####
+##!/bin/sh
+
+#if [ -z $1 ]
+#then
+#  echo "I CHANGED SOMETHING"
+# exit
+#else
+#  echo "I FAILED"
+#fi

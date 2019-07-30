@@ -1,0 +1,12 @@
+--- # play example
+- hosts: host1
+  become: yes
+  tasks:
+    - name: install software
+      apt:
+        name: elinks
+        state: latest
+#    - name: install more software
+#      apt:
+#        name: nmap-ncat
+#        state: latest

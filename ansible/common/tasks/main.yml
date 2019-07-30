@@ -1,0 +1,9 @@
+---
+# tasks file for common
+
+- include: create_hdfs.yml
+
+#- name: Install elinks
+#  apt:
+#    name: elinks
+#    state: latest

@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  vars:
+    target_file: /home/ansible/hostname
+  tasks:
+    - name: Gather file information
+      stat:
+        path: "{{ target_file }}"
+      register: hostname
+    - debug:
+        msg: "{{ hostname }}"
+    - name: Rename hostname when found
+      command: mv "{{ target_file }}" /home/ansible/net-info
+      when: hostname.stat.exists
+

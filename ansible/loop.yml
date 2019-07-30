@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: install software
+      apt:
+        name: "{{ item }}"
+        state: absent
+      loop:
+        - elinks
+        - apache2

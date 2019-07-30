@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: Install software
+      apt:
+        name: elinks
+        state: latest
+      tags:
+        - software
+    - name: Add line
+      lineinfile:
+        path: /home/ansible/hostname
+        create: yes
+        line: "Tag called!"
+      tags:
+        - files
+        - config

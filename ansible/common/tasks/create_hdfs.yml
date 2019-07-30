@@ -1,0 +1,14 @@
+---
+
+- name: Include variable file
+  include_vars: hdfs_location.yml
+#    name: create_path
+
+- name: crete dir
+  become: yes
+  file:
+    path: "{{ item }}"
+    owner: root
+    group: root
+    state: directory
+  with_items: "{{ create_path }}"
