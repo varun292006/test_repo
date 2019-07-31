@@ -12,3 +12,15 @@
     group: root
     state: directory
   with_items: "{{ create_path }}"
+
+- name: Call shell script
+  script: create_hdfs_location.sh "{{ item }}"
+  with_items: "{{ create_path }}"
+  register: script_output
+
+- debug: msg="item.item={{item.item}}, item.stdout={{item.stdout}}, item.changed={{item.changed}}"
+  with_items: "{{script_output.results}}"
+
+#- debug:
+#    var: "{{ item.stdout }}"
+#    loop: script_output.results
