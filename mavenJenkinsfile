@@ -6,10 +6,18 @@ pipeline {
                 git 'https://github.com/varun292006/test_repo.git'
             }
         }
-        stage("Build") {
-            script {
+        stage ('Initialize') {
+            steps {
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
+            }
+            stage("Build") {
+                sh '''
                 cd maven/HelloWorldApp
                 mvn package
+               '''
             }
         }
     }
