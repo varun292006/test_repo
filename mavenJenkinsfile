@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
     stages {
@@ -8,10 +7,8 @@ pipeline {
             }
         }
         stage("Build") {
-          sh "cd maven/HelloWorldApp"
-          sh "mvn package"
-                }
-            }
+            sh "cd maven/HelloWorldApp"
+            sh "mvn package"
         }
     }
 }
