@@ -1,0 +1,17 @@
+
+pipeline {
+    agent any
+    stages {
+        stage("source") {
+            steps {
+                git 'https://github.com/varun292006/test_repo.git'
+            }
+        }
+        stage("Build") {
+          sh "cd maven/HelloWorldApp"
+          sh "mvn package"
+                }
+            }
+        }
+    }
+}
