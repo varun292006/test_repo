@@ -7,8 +7,10 @@ pipeline {
             }
         }
         stage("Build") {
-            sh "cd maven/HelloWorldApp"
-            sh "mvn package"
+            script {
+                cd maven/HelloWorldApp
+                mvn package
+            }
         }
     }
 }
