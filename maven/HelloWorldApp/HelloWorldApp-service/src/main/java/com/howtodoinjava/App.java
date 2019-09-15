@@ -1,7 +1,7 @@
 package com.howtodoinjava;
 
 /**
- * Hello world!
+ * Hello world! Editing it online
  *
  */
 public class App 
