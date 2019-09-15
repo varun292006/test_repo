@@ -1,0 +1,129 @@
+git clone https://github.com/linuxacademy/content-weather-app.git src
+
+# DOCKERFILE
+# Create an image for weather-app
+
+FROM node
+LABEL org.label-schema.version=v1.1
+ARG SRC_DIR=/var/node
+ENV NODE_ENV="development"
+ENV PORT 3000
+RUN mkdir -p $SRC_DIR
+ADD src $SRC_DIR
+WORKDIR $SRC_DIR
+RUN npm install
+EXPOSE $PORT
+CMD ./bin/www
+
+# Create a container
+docker container run –d –name myContainer busybox
+
+# Map container port to host port (-P pulishes all exposed ports to random ports)
+docker container run -p [HOST_PORT]:[CONTAINER_PORT] [IMAGE]
+docker container run -p [HOST_PORT]:[CONTAINER_PORT]/tcp -p [HOST_PORT]:[CONTAINER_PORT]/udp [IMAGE]
+docker container run -P
+
+# List all mappings for a container
+docker container port [Container_NAME]
+
+# Execute commands on container
+docker container exec -it [NAME] [CMD]
+
+# Show information logged by a running container
+docker container logs [NAME]
+
+# List all volumes on a host:
+docker volume ls
+
+# Create two new volumes:
+docker volume create test-volume1
+docker volume create test-volume2
+
+# Get the flags available when creating a volume:
+docker volume create -h
+
+# Inspecting a volume:
+docker volume inspect test-volume1
+
+# Deleting a volume:
+docker volume rm test-volume
+
+# Removing all unused volumes:
+docker volume prune
+
+# Using the mount flag:
+mkdir target
+
+docker container run -d \
+  --name nginx-bind-mount1 \
+  --mount type=bind,source="$(pwd)"/target,target=/app \
+  nginx
+docker container ls
+
+# Bind mounts won't show up when listing volumes:
+docker volume ls
+
+# Inspect the container to find the bind mount:
+docker container inspect nginx-bind-mount1
+
+# Create a new file in /app on the container:
+docker container exec -it nginx-bind-mount1 /bin/bash
+cd target
+touch file1.txt
+ls
+exit
+
+# Using the volume flag:
+docker container run -d \
+ --name nginx-bind-mount2 \
+ -v "$(pwd)"/target2:/app \
+ nginx
+
+# Create /app/file3.txt in the container:
+docker container exec -it nginx-bind-mount2 touch /app/file3.txt
+ls target2
+
+# Create container by passing arguments (--build-arg)
+docker image build -t linuxacademy/weather-app:v3 --build-arg SRC_DIR=/var/code .
+
+# Connecting to a container using privileged user
+docker container exec -u 0 -it test-build /bin/bash
+
+# Show histroy of docker image
+docker image history <IMAGE>
+docker image history --no-trunc <IMAGE>
+docker image history --quiet <IMAGE>
+docker image history --quiet --no-trunc <IMAGE>
+
+# Save and load image
+docker image save <IMAGE> > <FILE>.tar
+docker image save <IMAGE> -o <FILE>.tar
+docker image save <IMAGE> --output <FILE>.tar
+
+docker image load < <FILE>.tar
+docker image load -i <FILE>.tar
+docker image load --input <FILE>.tar
+
+# Inspecting docker container processes
+docker container top <CONTAINER_NAME>
+docker container stats <CONTAINER_NAME>
+
+# Start container automatically (use --restart flag)
+docker container run -d --name mycontainer1 --restart always node:latest
+docker container run -d --name mycontainer2 --restart unless-stopped node:latest
+
+# List the containers which have exited (-q flag returns only the ID of containers)
+docker container ls -a -q -f status=exited
+
+# Remove all exited containers
+docker rm $(docker container ls -a -q -f status=exited)
+   or
+docker container prune
+
+# Managing docker using Portainer
+create portainer container
+docker container run -d --name portainer -p 8080:9000 \
+--restart=always \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v portainer_data:/data portainer/portainer
+
