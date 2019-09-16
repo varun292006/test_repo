@@ -31,3 +31,15 @@
           path: ./test_repo/maven/HelloWorldApp/HelloWorldApp-service
         source: build
         state: present
+
+    - name: Create container
+      docker_container:
+        name: mycontainer
+        image: testrepo292006-common.jfrog.io/test/helloworldapp-ear:1.1.0-SNAPSHOT
+        state: present
+#    command: redis-server --appendonly yes
+#    recreate: yes
+#    exposed_ports:
+#      - 6379
+#    volumes_from:
+#      - mydata
