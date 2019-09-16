@@ -1,0 +1,33 @@
+--- # play example
+- hosts: host1
+#  become: yes
+  tasks:
+    - name: Install pip
+      apt: name=python-pip state=present
+
+#    - name: install docker-py package
+#      pip: name=docker-py
+
+    - name: Get PWD
+      command: pwd
+      register: working_dir
+
+    - debug:
+        var: working_dir
+
+    - name: Change directory
+      command: env
+      register: envirn
+
+
+#    - debug:
+#        msg: "{{ CWD }}"
+
+    - name: Build image and with build args
+      docker_image:
+        name: myimage
+        build:
+         # dockerfile: ./test_repo/maven/HelloWorldApp/HelloWorldApp-service/Dockerfile
+          path: ./test_repo/maven/HelloWorldApp/HelloWorldApp-service
+        source: build
+        state: present
