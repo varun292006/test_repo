@@ -23,14 +23,14 @@
 #    - debug:
 #        msg: "{{ CWD }}"
 
-    - name: Build image and with build args
-      docker_image:
-        name: myimage
-        build:
-         # dockerfile: ./test_repo/maven/HelloWorldApp/HelloWorldApp-service/Dockerfile
-          path: ./test_repo/maven/HelloWorldApp/HelloWorldApp-service
-        source: build
-        state: present
+#    - name: Build image and with build args
+#      docker_image:
+#        name: myimage
+#        build:
+#         # dockerfile: ./test_repo/maven/HelloWorldApp/HelloWorldApp-service/Dockerfile
+#          path: ./test_repo/maven/HelloWorldApp/HelloWorldApp-service
+#        source: build
+#        state: present
 
     - name: Create container
       docker_container:
