@@ -1,1 +1,2 @@
 host1 ansible_ssh_host=localhost
+host2 ansible_ssh_host=18.130.253.24 ansible_user=ansible
