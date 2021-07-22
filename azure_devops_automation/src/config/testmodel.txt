@@ -1,0 +1,12 @@
+org=https://dev.azure.com/<organization_name>
+projectName=<project_name>
+repoName=<repo_name>
+teamName=<team_name>
+folderName=<pipeline_folder_name>
+teamMembers=<team_members_comma_separated>
+optionalReviewers=
+requiredReviewers=
+teamAdminMembers=
+childIterationNamesList=Sprint1,Sprint2,Sprint3
+iterationsPermissionsBit=7
+allowBit=2,4,16,32,64,4096,16384
